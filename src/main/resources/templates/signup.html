@@ -37,7 +37,7 @@
 				User: <input type="text" class="form-control" th:field="*{user}"></input>
 				<div th:if="${#fields.hasErrors('user')}" class="alert alert-danger" role="alert" th:errors="*{user}"></div>
 				<br/>
-				Password: <input type="text" class="form-control" th:field="*{password}"></input>
+				Password: <input type="password" class="form-control" th:field="*{password}"></input>
 				<div th:if="${#fields.hasErrors('password')}" class="alert alert-danger" role="alert" th:errors="*{password}"></div>
 				<br/>
 				Card Number: <input type="text" class="form-control" th:field="*{cardnumber}"></input>
