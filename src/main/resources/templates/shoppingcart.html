@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Kardex - Shopping Cart</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link href="#" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+
+	<header>
+		<ul class="nav nav-pills nav-justified">
+			<li class="nav-item"><a class="nav-link active"
+				aria-current="page" href="#" th:href="@{/showproducts}">Inventory</a></li>
+			<li class="nav-item"><a class="nav-link" href="#">Shopping Cart</a></li>
+			<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+			<li class="nav-item"><a class="nav-link disabled" href="#"
+				tabindex="-1" aria-disabled="true">Disabled</a></li>
+		</ul>
+
+	</header>
+
+	<div class="col-8">
+		<h2>Shopping Cart</h2>
+		<div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)"
+			th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
+		</div>
+		<form th:object="${productCodeDto}" th:action="@{/shoppingCart/add}"
+			method="post">
+			<div class="form-group">
+				<label for="codigo">Product Code</label> <input autofocus
+					autocomplete="off" th:field="*{code}" id="codigo"
+					placeholder="Indicate the product code" type="text"
+					class="form-control"
+					th:classappend="${#fields.hasErrors('code')} ? 'is-invalid' : ''">
+				<div th:if="${error !=null}" class="alert alert-danger" role="alert">
+					<span th:text="${error}"></span>
+				</div>
+				<div th:if="${#fields.hasErrors('code')}" class="alert alert-danger"
+					role="alert" th:errors="*{code}"></div>
+				<button class="btn btn-lg btn-success btn-block" type="submit">
+					<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+					Add Product
+				</button>
+			</div>
+		</form>
+		<br> <a href="#" th:href="@{/shoppingCart/finishbuying}">
+			<button class="btn btn-lg btn-success " type="submit">
+				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Finish
+				buying
+			</button>
+		</a> <a href="#" th:href="@{/shoppingCart/cancelsale}">
+			<button class="btn btn-lg btn-danger " type="submit"
+				onclick="if(!(confirm('You are going to remove all the products from the shopping cart. Are you sure?'))) return false;">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Cancel
+				Sale
+			</button>
+		</a>
+		<div th:if="${errorf !=null}" class="alert alert-danger" role="alert">
+			<span th:text="${errorf}"></span>
+		</div>
+		<h1 th:text="${'Total: ' + total}"></h1>
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Code</th>
+						<th>Price</th>
+						<th>Existence</th>
+						<th>Total</th>
+						<th>Remove</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product, iterador : ${session.shoppingCart}">
+						<td th:text="${product.name}"></td>
+						<td th:text="${product.code}"></td>
+						<td th:text="${product.price}"></td>
+						<td th:text="${product.existence}"></td>
+						<td th:text="${product.quantity}"></td>
+						<td><a href="#"
+							th:href="@{/shoppingCart/deletefromshoppingcart(index=${iterador.index})}">
+								<button type="button" class="btn btn-danger"
+									onclick="if(!(confirm('You are going to delete a product. Are you sure?'))) return false;">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>

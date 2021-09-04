@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Kardex - Add/modify Product</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="#" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Products Form</h1>
+			<br/>
+			<form action="#" th:action="@{/addproduct}" th:object="${product}" method="post">
+				<input type="hidden" th:field="*{id}"></input>
+				Product Name: <input type="text" class="form-control" th:field="*{name}"></input>
+<!-- 				<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"> </p> -->
+				<div th:if="${#fields.hasErrors('name')}" class="alert alert-danger" role="alert" th:errors="*{name}"></div>
+				<br/>
+				Code: <input type="text" class="form-control" th:field="*{code}"></input>
+				<div th:if="${#fields.hasErrors('code')}" class="alert alert-danger" role="alert" th:errors="*{code}"></div>
+				<br/>
+				Price: <input type="text" class="form-control" th:field="*{price}"></input>
+				<div th:if="${#fields.hasErrors('price')}" class="alert alert-danger" role="alert" th:errors="*{price}"></div>
+				<br/>
+				Existence: <input type="text" class="form-control" th:field="*{existence}"></input>
+				<div th:if="${#fields.hasErrors('existence')}" class="alert alert-danger" role="alert" th:errors="*{existence}"></div>
+				<br/>
+				<br/>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Accept
+				</button>
+				
+			</form>
+				<a href="#" th:href="@{/showproducts}">
+				<button class="btn btn-lg btn-danger btn-block" type="submit">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel
+				</button>
+				</a>
+		</div>
+	</div>
+
+</body>
+</html>
