@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.todo1.kardex.component.ProductConverter;
+import com.todo1.kardex.component.UserConverter;
 import com.todo1.kardex.entity.Product;
 import com.todo1.kardex.model.ProductDto;
 import com.todo1.kardex.repository.ProductJpaRepository;
@@ -24,6 +25,7 @@ public class ProductsServiceImpl implements ProductsService {
 	@Qualifier("productConverter")
 	private ProductConverter productConverter;
 	
+	
 	@Override
 	public List<ProductDto> listAllProducts() {
 		List<ProductDto> listProductModel = new ArrayList<>();
@@ -38,12 +40,23 @@ public class ProductsServiceImpl implements ProductsService {
 
 	@Override
 	public ProductDto getProductById(int id) {
-		return productConverter.entityToModel(productJpaRepository.getById(id));
+		
+		Product product = productJpaRepository.getById(id);
+		if (product == null)  return null;
+		return productConverter.entityToModel(product);
+		
 	}
 
 	@Override
 	public void deleteProduct(int id) {
 		productJpaRepository.deleteById(id);
+	}
+
+	@Override
+	public ProductDto getProductByCode(String code) {
+		Product product = productJpaRepository.findFirstByCode(code);
+		if (product == null)  return null;
+		return productConverter.entityToModel(product);
 	}
 
 }

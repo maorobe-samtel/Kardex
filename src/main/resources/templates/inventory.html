@@ -24,9 +24,9 @@
 				aria-current="page" href="#">Inventory</a></li>
 			<li class="nav-item"><a class="nav-link" href="#" th:href="@{/shoppingCart/sell}">Shopping Cart</a></li>
 			<li class="nav-item"><a class="nav-link disabled" href="#"
-				tabindex="-1" aria-disabled="true">Sales</a></li>
-			<li class="nav-item"><a class="nav-link disabled" href="#"
-				tabindex="-1" aria-disabled="true">Disabled</a></li>
+				tabindex="-1" aria-disabled="true">Sales(coming soon)</a></li>
+			<li class="nav-item"><a class="nav-link" href="#" th:href="@{/login}">Logout</a></li>
+			
 		</ul>
 
 	</header>
@@ -34,7 +34,7 @@
 	<div class="container">
 
 		<h1>Hello, user!</h1>
-		<br /> <a href="#" th:href="@{/productform}">
+		<br /> <a href="#" th:href="@{/productcontroller/productform}">
 			<button class="btn btn-lg btn-success btn-block" type="submit">
 				<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>
 				Add Product
@@ -64,11 +64,11 @@
 						<td><span th:text="${product.code}"></span></td>
 						<td><span th:text="${product.price}"></span></td>
 						<td><span th:text="${product.existence}"></span></td>
-						<td><a href="#" th:href="@{/productform(id=${product.id})}">
+						<td><a href="#" th:href="@{/productcontroller/productform(id=${product.id},code=${product.code})}">
 								<button type="button" class="btn btn-default">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
-						</a> <a href="#" th:href="@{/deleteproduct(id=${product.id})}">
+						</a> <a href="#" th:href="@{/productcontroller/deleteproduct(id=${product.id})}">
 								<button type="button" class="btn btn-danger"
 									onclick="if(!(confirm('You are going to delete a product. Are you sure?'))) return false;">
 									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>

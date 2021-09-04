@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Kardex - Sign Up</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="#" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Sign Up</h1>
+			<br/>
+			<form action="#" th:action="@{/addUser}" th:object="${userdto}" method="post">
+				
+				<div th:if="${error !=null}" class="alert alert-danger" role="alert">Invalid info</div>
+				Name: <input type="text" class="form-control" th:field="*{name}"></input>
+				<div th:if="${#fields.hasErrors('name')}" class="alert alert-danger" role="alert" th:errors="*{name}"></div>
+				<br/>
+				
+				Identification: <input type="text" class="form-control" th:field="*{identification}"></input>
+				<div th:if="${#fields.hasErrors('identification')}" class="alert alert-danger" role="alert" th:errors="*{identification}"></div>
+				<br/>
+				
+				Email: <input type="text" class="form-control" th:field="*{email}"></input>
+				<div th:if="${#fields.hasErrors('email')}" class="alert alert-danger" role="alert" th:errors="*{email}"></div>
+				<br/>
+				
+				User: <input type="text" class="form-control" th:field="*{user}"></input>
+				<div th:if="${#fields.hasErrors('user')}" class="alert alert-danger" role="alert" th:errors="*{user}"></div>
+				<br/>
+				Password: <input type="text" class="form-control" th:field="*{password}"></input>
+				<div th:if="${#fields.hasErrors('password')}" class="alert alert-danger" role="alert" th:errors="*{password}"></div>
+				<br/>
+				Card Number: <input type="text" class="form-control" th:field="*{cardnumber}"></input>
+				<div th:if="${#fields.hasErrors('cardnumber')}" class="alert alert-danger" role="alert" th:errors="*{cardnumber}"></div>
+				
+				<br/>
+				<br/>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Accept
+				</button>
+				
+			</form>
+				<a href="#" th:href="@{/login}">
+				<button class="btn btn-lg btn-danger btn-block" type="submit">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel
+				</button>
+				</a>
+		</div>
+	</div>
+
+</body>
+</html>

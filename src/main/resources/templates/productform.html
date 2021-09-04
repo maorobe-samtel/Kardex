@@ -19,14 +19,18 @@
 		<div class="container">
 			<h1>Products Form</h1>
 			<br/>
-			<form action="#" th:action="@{/addproduct}" th:object="${product}" method="post">
+			<form action="#" th:action="@{/productcontroller/addproduct}" th:object="${product}" method="post">
 				<input type="hidden" th:field="*{id}"></input>
+				<input type="hidden" name="codeU" th:value="${codeU}"></input>
 				Product Name: <input type="text" class="form-control" th:field="*{name}"></input>
 <!-- 				<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"> </p> -->
 				<div th:if="${#fields.hasErrors('name')}" class="alert alert-danger" role="alert" th:errors="*{name}"></div>
 				<br/>
 				Code: <input type="text" class="form-control" th:field="*{code}"></input>
 				<div th:if="${#fields.hasErrors('code')}" class="alert alert-danger" role="alert" th:errors="*{code}"></div>
+				<div th:if="${error !=null}" class="alert alert-danger" role="alert">
+					<span th:text="${error}"></span>
+				</div>
 				<br/>
 				Price: <input type="text" class="form-control" th:field="*{price}"></input>
 				<div th:if="${#fields.hasErrors('price')}" class="alert alert-danger" role="alert" th:errors="*{price}"></div>
@@ -40,7 +44,7 @@
 				</button>
 				
 			</form>
-				<a href="#" th:href="@{/showproducts}">
+				<a href="#" th:href="@{/productcontroller/showproducts}">
 				<button class="btn btn-lg btn-danger btn-block" type="submit">
 					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel
 				</button>
